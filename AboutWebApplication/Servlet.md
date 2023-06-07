@@ -3,7 +3,7 @@
 * HTTP 요청 정보를 편리하게 사용 할 수 있는 HttpServletRequest
 * HTTP 응답 정보를 편리하게 사용 할 수 있는 HttpServletResponse
 * 개발자는 HTTP 스펙을 매우 편리하게 사용 가능</br>
-  <img src="/img/se.PNG">
+  <img src="img/se.PNG">
 * 개발자는 초록색 영역만 고민하면 됨.
 * 나머지는 servlet이 다 처리해줌
 
