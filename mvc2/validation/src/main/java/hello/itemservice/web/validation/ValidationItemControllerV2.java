@@ -60,7 +60,7 @@ public class ValidationItemControllerV2 {
             bindingResult.addError(new FieldError("quantity", "quantity", "수량은 최대 9,999까지 허용합니다."));
         }
 
-        // 특정 필드가 아닌 복합 롤 검증
+        // 특정 필드가 아닌 복합 롤 검증hgb
         if(item.getPrice() != null && item.getQuantity() != null){
             int resultPrice  = item.getPrice() * item.getQuantity();
             if(resultPrice < 10000){
