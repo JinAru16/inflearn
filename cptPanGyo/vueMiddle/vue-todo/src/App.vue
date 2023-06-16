@@ -2,42 +2,55 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList></TodoList>
+    <!--<TodoList v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성"></TodoList> -->
+    <TodoList v-bind:propsdata="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
 
 <script>
-import TodoHeaderVue from './components/TodoHeader.vue'
-import TodoInputVue from './components/TodoInput.vue'
-import TodoListVue from './components/TodoList.vue'
-import TodoFooterVue from './components/TodoFooter.vue'
+import TodoHeader from './components/TodoHeader.vue'
+import TodoInput from './components/TodoInput.vue'
+import TodoList from './components/TodoList.vue'
+import TodoFooter from './components/TodoFooter.vue'
 
 export default {
-  components : {
-    'TodoHeader' : TodoHeaderVue,
-    'TodoInput' : TodoInputVue,
-    'TodoList' : TodoListVue,
-    'TodoFooter' : TodoFooterVue
-  }
+  data: function(){
+    return{
+      todoItems: []
+    }
+  },
+  created: function() {
+    if (localStorage.length > 0) {
+      for (var i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+        }
+      }
+    }
+  },
+  components: {
+    TodoHeader: TodoHeader,
+    TodoInput: TodoInput,
+    TodoList: TodoList,
+    TodoFooter: TodoFooter
+  }  
 }
 </script>
 
 <style>
- body {
+body {
   text-align: center;
-  background-color: #f6f6f6;
- }
- 
- input{
+  background-color: #F6F6F8;
+}
+input {
   border-style: groove;
-  widows: 200px;
- }
- button{
+  width: 200px;
+}
+button {
   border-style: groove;
- }
- .shadow{
-  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
- }
-
+}
+.shadow {
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03)
+}
 </style>

@@ -1,10 +1,8 @@
 <template>
-  <header><h1>Todo !</h1></header>
+  <header>
+    <h1>TODO it!</h1>
+  </header>
 </template>
-
-<script>
-
-</script>
 
 <style scoped>
 h1 {
