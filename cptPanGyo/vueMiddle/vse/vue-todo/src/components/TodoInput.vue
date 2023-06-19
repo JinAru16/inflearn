@@ -9,7 +9,14 @@
       you can use custom content here to overwrite
       default content
     -->
-      <h3 slot="header">custom header</h3>
+      <h3 slot="header">
+        경고!
+        <i class="closeModalBtn fas fa-times" @click="showModal=false"></i>
+      </h3>
+      <div slot="body">
+        퀴즈 : 모달 바디에 값 넣기
+      </div>
+      
     </Modal>
   </div>
 </template>
@@ -18,14 +25,14 @@
 import Modal from './common/Modal.vue';
 
 export default {
-  data: function() {
+  data() {
     return {
       newTodoItem: '',
       showModal: false
     }
   },
   methods: {
-    addTodo: function() {
+    addTodo() {
       if (this.newTodoItem !== '') {
         this.$emit('addTodoItem', this.newTodoItem);
         this.clearInput();
@@ -33,12 +40,12 @@ export default {
         this.showModal = !this.showModal;
       }
     },
-    clearInput: function() {
+    clearInput() {
       this.newTodoItem = '';
     }
   },
   components: {
-    Modal: Modal
+    Modal
   }
 }
 </script>
@@ -67,5 +74,8 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+.closeModalBtn{
+  color: #42b983
 }
 </style>
