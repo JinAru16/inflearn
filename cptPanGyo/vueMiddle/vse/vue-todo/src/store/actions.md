@@ -45,11 +45,13 @@ actions: {
 ```
 
 * App.vue
+```
 methods: {
   getProduct(){
     this.$store.dispatch('fetchProductData');
   }
 }
+```
 
 ## 왜 비동기 처리 로직은 actions에 선언해야 할까?
 * 1. 언제 어느 컴포넌트에서 해당 state를 호출하고, 변경했는지 확인하기가 어려움
