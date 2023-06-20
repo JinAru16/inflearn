@@ -24,7 +24,6 @@ export default {
   methods:{
   
   },
- 
   components: {
     // 컴포넌트 태그명 : 컴포넌트 내용  현재 둘다 이름이 같은 상태
     // 'TodoHeader': TodoHeader, => TodoHeader 하나로 축약가능

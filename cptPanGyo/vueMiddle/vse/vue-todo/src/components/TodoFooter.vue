@@ -6,11 +6,13 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
+  
   methods: {
-    clearTodo() {
-      this.$store.commit('clearAllItems')
-    },
+    ...mapMutations({
+    clearTodo : 'clearAllItems'
+  }),
     sortTodo(){
       this.$store.commit('sortAllItems', (this.$store.state.todoItems))
     }

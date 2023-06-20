@@ -5,9 +5,9 @@
 * App.vue
 ```
 import { mapState } from 'vuex'
-improt { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import { mapMutations } from 'vuex'
-import { mapActions } form 'vuex'
+import { mapActions } from 'vuex'
 
 export default{
    computed() { ...mapState(['num'], ...mapGetters(['countedNum']))},

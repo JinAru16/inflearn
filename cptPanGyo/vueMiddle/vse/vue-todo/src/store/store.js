@@ -21,6 +21,11 @@ export const store = new Vuex.Store({
     headerText: 'Todo it from Store Using Vuex',
     todoItems: storage.fetch()
   },
+  getters:{
+    storedTodoItems(state){
+      return state.todoItems;
+    }
+  },
   mutations:{
     /*
     state를 mutations를 통해 변경하는 이유
@@ -39,12 +44,14 @@ export const store = new Vuex.Store({
        localStorage.removeItem(payload.todoItem.item);
        state.todoItems.splice(payload.index, 1);
     },
-    toggleOneItem (state, payload){
-      state.todoItems[payload.index].completed = (!this.todoItems[payload.index].completed)
+    toggleOneItem(state, payload){
+
+      state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
       localStorage.removeItem(payload.todoItem.item);
       localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
+      
     },
-    clearAllItems (state){
+    clearAllItems(state){
       localStorage.clear();
       state.todoItems = []
     },
