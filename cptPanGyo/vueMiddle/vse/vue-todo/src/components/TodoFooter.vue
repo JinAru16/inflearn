@@ -1,6 +1,7 @@
 <template>
   <div class="clearAllContainer">
     <span class="clearAllBtn" v-on:click="clearTodo">Clear All</span>
+    <span class="sortAllBtn" v-on:click="sortTodo">Sort all</span>
   </div>
 </template>
 
@@ -8,7 +9,10 @@
 export default {
   methods: {
     clearTodo() {
-      this.$emit('clearAll')
+      this.$store.commit('clearAllItems')
+    },
+    sortTodo(){
+      this.$store.commit('sortAllItems', (this.$store.state.todoItems))
     }
   }
 }
@@ -23,7 +27,7 @@ export default {
   border-radius: 5px;
   margin: 0 auto;
 }
-.clearAllBtn {
+.clearAllBtn, .sortAllBtn {
   color: #e20303;
   /* 추가 */
   display: block;

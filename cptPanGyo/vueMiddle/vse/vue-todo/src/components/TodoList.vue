@@ -16,10 +16,11 @@
 export default {
   methods: {
     removeTodo(todoItem, index) {
-      this.$emit('removeItem', todoItem, index);
+                                          //{todoItem, index} => 하나로 묶어서 store.js에서 'payload'로 받을 수 있음
+      this.$store.commit('removeOneItem', {todoItem, index});
     },
     toggleComplete(todoItem, index) {
-     this.$emit('toggleItem', todoItem, index); 
+     this.$store.commit('toggleOneItem', {todoItem, index}); 
     }
   }
 }
