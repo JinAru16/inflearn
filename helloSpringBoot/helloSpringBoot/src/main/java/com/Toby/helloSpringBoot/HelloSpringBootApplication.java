@@ -28,6 +28,7 @@ public class HelloSpringBootApplication {
 	public static void main(String[] args) {
 		GenericApplicationContext applicationContext = new GenericApplicationContext();
 		applicationContext.registerBean(HelloController.class);
+		applicationContext.registerBean(SimpleHelloService.class);
 		applicationContext.refresh();
 
 		TomcatServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
