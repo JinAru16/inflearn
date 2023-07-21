@@ -1,7 +1,6 @@
-package com.Toby.helloSpringBoot;
+package com.Toby.Config;
 
-
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-@Component
-public @interface MyComponent {
+@Configuration(proxyBeanMethods = false)
+public @interface MyAutoConfiguration {
 }
