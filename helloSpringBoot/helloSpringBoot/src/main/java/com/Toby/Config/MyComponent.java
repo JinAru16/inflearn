@@ -1,4 +1,4 @@
-package com.Toby.Config.autoconfig;
+package com.Toby.Config;
 
 
 import org.springframework.stereotype.Component;

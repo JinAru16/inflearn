@@ -1,5 +1,5 @@
 package com.Toby.helloSpringBoot;
-import com.Toby.Config.autoconfig.MySpringBootApplication;
+import com.Toby.Config.MySpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 @MySpringBootApplication

@@ -2,8 +2,9 @@ package com.Toby.helloSpringBoot;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @Primary
 public class HelloDecorator implements HelloService{
     private final HelloService helloService;

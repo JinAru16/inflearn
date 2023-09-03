@@ -1,4 +1,4 @@
-package com.Toby.Config.autoconfig;
+package com.Toby.Config;
 
 import com.Toby.Config.EnableMyAutoConfiguration;
 import com.Toby.Config.autoconfig.DispatcherServletConfig;

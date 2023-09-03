@@ -5,8 +5,8 @@
       <profile default="true" name="Default" enabled="true" />
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="helloSpringBoot.helloSpringBoot.main" target="11" />
-      <module name="helloSpringBoot.helloSpringBoot.test" target="11" />
+      <module name="helloSpringBoot.helloSpringBoot.main~1" target="11" />
+      <module name="helloSpringBoot.helloSpringBoot.test~1" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
