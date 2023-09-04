@@ -54,5 +54,36 @@ public class TemplateMethodTest {
          */
     }
 
+    /**
+     * 익명 내부 클래스를 이용한 방법.
+     */
+    @Test
+    public void templateMethodV2(){
+        AbstractTemplate template1 = new AbstractTemplate(){
+
+            @Override
+            protected void call() {
+                log.info("비즈니스 로직1 실행");
+            }
+        };
+        AbstractTemplate template2 = new AbstractTemplate(){
+
+            @Override
+            protected void call() {
+                log.info("비즈니스 로직2 실행");
+            }
+        };
+
+        template1.execute();
+        template2.execute();
+        /**
+         * 템플릿 메서드는 SubClassLogic1, SubClassLogic2처럼 클래스를 계속 만들어야 하는 단점이 있다.
+         * 이를 익명 내부 클래스 함수를 만들면 보완이 가능하다.
+         * 익명 내부 클래스를 이용하면 객체 인스턴스를 생성하면서 동시에 생성할 클래스를 상속바등ㄴ 자식 클래스를 정의 할 수 있다. 이 클래스는
+         * SubClassLogic1처럼 직접 지정하는 이름이 없고 클래스 내부에서 선언되는 클래스여서 익명 내부 클래스라고 한다.
+         * 익명 내부 클래스에 대한 자세한 내용은 자바 기본 문법을 참고하자.
+         */
+    }
+
 
 }
