@@ -1,11 +1,13 @@
 package hello.proxy;
 
 import hello.proxy.config.AppV1Config;
+import hello.proxy.config.AppV2Config;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-@Import(AppV1Config.class)
+//@Import(AppV1Config.class)
+@Import({AppV1Config.class, AppV2Config.class})
 @SpringBootApplication(scanBasePackages = "hello.proxy.app") //주의
 /**
  * ScanBasePackages를 별로로 적용해주면 해당 패키지와 그 패키지 하위만 컴포넌트 스캔을 하게 됨.
