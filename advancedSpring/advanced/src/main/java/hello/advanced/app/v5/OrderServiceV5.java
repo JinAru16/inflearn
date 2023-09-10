@@ -7,8 +7,6 @@ import hello.advanced.trace.template.AbstractTemplate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static sun.launcher.LauncherHelper.trace;
-
 @Service
 public class OrderServiceV5 {
 
