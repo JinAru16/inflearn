@@ -1,5 +1,7 @@
 package hello.proxy.app.v2;
 
+import hello.proxy.trace.logtrace.LogTrace;
+
 public class OrderRepositoryV2 {
 
     public void save(String itemId) {
