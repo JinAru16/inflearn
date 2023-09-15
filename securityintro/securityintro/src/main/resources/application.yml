@@ -1,0 +1,31 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/security
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-Auto: create
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+    openInView: true #OSIV는 ORM 프레임워크에서 사용하는 패턴으로 객체와 세션을 연동하여 처리하는 기술이다.인증과 권한 정보를 엑세스할 때 OSIV를 사용하여 객체와 세션을 연동하여 처리한다.
+    #요청시 Hibernate 세션으로 연동 처리를 하지만 동기화 문제로 성능이 느려질 수 있다.
+    #
+    #하나의 요청에서 여러개의 Hibernate 세션을 사용하는 경우 예외 발생시 모든 세션을 롤백해야하는 문제 발생
+    #
+    #예외 발생시 Hibernate 세션이 닫히므로 데이터베이스 락이 발생할 수 있다.
+    #
+    #데드락 발생 시 트랜잭션으로 롤백을 해야한다.
+    #
+    #이러한 LAZY 로딩의 문제를 해결하기 위해 JOIN FETCH절을 이용한 JPQL작성한다.
+
+
+
+logging.leve:
+  org.hibernate.SQL: debug

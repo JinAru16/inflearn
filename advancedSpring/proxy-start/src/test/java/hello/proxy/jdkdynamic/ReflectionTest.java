@@ -68,6 +68,5 @@ public class ReflectionTest {
             log.info("callB");
             return "B";
         }
-
     }
 }
