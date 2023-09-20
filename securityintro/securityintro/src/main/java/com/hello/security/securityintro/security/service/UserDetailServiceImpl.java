@@ -1,8 +1,8 @@
 package com.hello.security.securityintro.security.service;
 
 import com.hello.security.securityintro.security.domain.UserDetailsImpl;
-import com.hello.security.securityintro.user.domain.UserEntity;
-import com.hello.security.securityintro.user.repository.UserRepository;
+import com.hello.security.securityintro.auth.domain.UserEntity;
+import com.hello.security.securityintro.auth.repository.AuthRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,11 +15,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDetailServiceImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final AuthRepository authRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userInfo = userRepository.findByUserName(username);
+        UserEntity userInfo = authRepository.findByUserName(username);
         if (userInfo == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }

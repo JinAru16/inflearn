@@ -2,10 +2,10 @@ package com.hello.security.securityintro.initdb;
 
 import com.hello.security.securityintro.admin.Domain.NoticeCreate;
 import com.hello.security.securityintro.admin.service.AdminService;
-import com.hello.security.securityintro.board.domain.BoardDetailDto;
+import com.hello.security.securityintro.board.domain.BoardCreate;
 import com.hello.security.securityintro.board.service.BoardService;
-import com.hello.security.securityintro.user.domain.UserCreate;
-import com.hello.security.securityintro.user.service.UserService;
+import com.hello.security.securityintro.auth.domain.UserCreate;
+import com.hello.security.securityintro.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +31,7 @@ public class defaultData {
     @RequiredArgsConstructor
     public static class InitService{
         private final EntityManager em;
-        private final UserService userService;
+        private final AuthService authService;
         private final BoardService boardService;
         private final AdminService adminService;
 
@@ -49,45 +49,40 @@ public class defaultData {
                             .phoneNumber("010-2222-3333")
                             .build();
 
-            userService.createUser(user1);
-            userService.createUser(user2);
+            authService.createUser(user1);
+            authService.createUser(user2);
         }
 
         public void boardInit(){
-            BoardDetailDto detail = BoardDetailDto.builder()
-                    .username("admin1")
+            BoardCreate detail = BoardCreate.builder()
                     .title("testing board")
                     .content("content created")
                     .build();
 
-            BoardDetailDto detail2 = BoardDetailDto.builder()
-                    .username("admin2")
+            BoardCreate detail2 = BoardCreate.builder()
                     .title("content for finding result")
                     .content("content has created")
                     .build();
 
-            BoardDetailDto detail3 = BoardDetailDto.builder()
-                    .username("admin2")
+            BoardCreate detail3 = BoardCreate.builder()
                     .title("content created 3")
                     .content("content has created")
                     .build();
-            BoardDetailDto detail4 = BoardDetailDto.builder()
-                    .username("admin1")
+            BoardCreate detail4 = BoardCreate.builder()
                     .title("content created 4")
                     .content("admin content has created")
                     .build();
-            BoardDetailDto detail5 = BoardDetailDto.builder()
-                    .username("admin2")
+            BoardCreate detail5 = BoardCreate.builder()
                     .title("admin2's contend has created")
                     .content("admin2's content has created")
                     .build();
 
 
-            boardService.insertBoard(detail);
-            boardService.insertBoard(detail2);
-            boardService.insertBoard(detail3);
-            boardService.insertBoard(detail4);
-            boardService.insertBoard(detail5);
+            boardService.insertBoard(detail, "admin1");
+            boardService.insertBoard(detail2, "admin2");
+            boardService.insertBoard(detail3, "admin1");
+            boardService.insertBoard(detail4, "admin1");
+            boardService.insertBoard(detail5, "admin2");
         }
         public void noticeInit(){
             NoticeCreate notice1 = NoticeCreate.builder()

@@ -1,15 +1,17 @@
 package com.hello.security.securityintro.board.domain;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class BoardCreate {
-    private String username;
     private String title;
     private String content;
 
-    public BoardCreate(String username, String title, String content) {
-        this.username = username;
+    @Builder
+    public BoardCreate(String title, String content) {
         this.title = title;
         this.content = content;
     }

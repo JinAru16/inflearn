@@ -1,6 +1,5 @@
 package com.hello.security.securityintro.security.domain;
 
-import com.hello.security.securityintro.user.domain.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;

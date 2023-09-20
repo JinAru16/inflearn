@@ -1,4 +1,4 @@
-package com.hello.security.securityintro.user.domain;
+package com.hello.security.securityintro.auth.domain;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,5 +1,6 @@
 package com.hello.security.securityintro.board.service;
 
+import com.hello.security.securityintro.board.domain.BoardCreate;
 import com.hello.security.securityintro.board.domain.BoardDetailDto;
 import com.hello.security.securityintro.board.domain.BoardEntity;
 import com.hello.security.securityintro.board.domain.BoardListDto;
@@ -30,8 +31,8 @@ public class BoardService {
         return req.map(b -> new BoardDetailDto(req)).orElseThrow();
     }
 
-    public Long insertBoard(BoardDetailDto board) {
-        BoardEntity req = new BoardEntity(board);
+    public Long insertBoard(BoardCreate board, String userName) {
+        BoardEntity req = new BoardEntity(board, userName);
         BoardEntity save = boardRepository.save(req);
         return save.getId();
     }

@@ -28,8 +28,8 @@ public class BoardEntity {
     }
 
     @Builder
-    public BoardEntity(BoardDetailDto dto){
-        this.username = dto.getUsername();
+    public BoardEntity(BoardCreate dto, String username){
+        this.username = username;
         this.title = dto.getTitle();
         this.content = dto.getContent();
     }

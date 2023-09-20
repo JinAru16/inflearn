@@ -1,8 +1,7 @@
-package com.hello.security.securityintro.user.domain;
+package com.hello.security.securityintro.auth.domain;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;

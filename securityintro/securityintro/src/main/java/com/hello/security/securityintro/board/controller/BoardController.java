@@ -31,8 +31,8 @@ public class BoardController {
 
     //단건 입력
     @PostMapping("/board/create")
-    public Long postBoard(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody BoardDetailDto board){
-        return boardService.insertBoard(board);
+    public Long postBoard(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody BoardCreate board){
+        return boardService.insertBoard(board, userDetails.getUsername());
     }
 
     // 단건 수정

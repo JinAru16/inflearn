@@ -1,11 +1,11 @@
-package com.hello.security.securityintro.user.controller;
+package com.hello.security.securityintro.auth.controller;
 
 import com.hello.security.securityintro.config.JwtConfig;
 import com.hello.security.securityintro.security.domain.UserDetailsImpl;
-import com.hello.security.securityintro.user.domain.SignInRequest;
-import com.hello.security.securityintro.user.domain.SignInResponse;
-import com.hello.security.securityintro.user.domain.UserCreate;
-import com.hello.security.securityintro.user.service.UserService;
+import com.hello.security.securityintro.auth.domain.SignInRequest;
+import com.hello.security.securityintro.auth.domain.SignInResponse;
+import com.hello.security.securityintro.auth.domain.UserCreate;
+import com.hello.security.securityintro.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtConfig jwtConfig;
-    private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticationSignIn(@RequestBody SignInRequest req){
@@ -37,6 +37,6 @@ public class UserController {
     }
     @PostMapping("/signup")
     public String signUp(@RequestBody UserCreate userCreate){
-        return userService.createUser(userCreate);
+        return authService.createUser(userCreate);
     }
 }
