@@ -25,7 +25,11 @@ spring:
     #
     #이러한 LAZY 로딩의 문제를 해결하기 위해 JOIN FETCH절을 이용한 JPQL작성한다.
 
-
+custom:
+  jwt:
+    secretKey: 9KO87Iud7ZyM8IKsIOq1v+yEcCBFV1MK
+    accessTokenExpirationMin: 30
+    refreshTokenExpirationMin: 100
 
 logging.leve:
   org.hibernate.SQL: debug
