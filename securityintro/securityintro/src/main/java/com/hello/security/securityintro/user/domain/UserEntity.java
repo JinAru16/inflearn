@@ -32,9 +32,9 @@ public class UserEntity {
         this.role = role;
 
     }
-    public UserEntity(UserCreate userCreate){
+    public UserEntity(UserCreate userCreate, String encode){
         this.userName = userCreate.getUserName();
-        this.password = userCreate.getPassword();
+        this.password = encode;
         this.phoneNumber = userCreate.getPhoneNumber();
         this.role = "NORMAL";
     }

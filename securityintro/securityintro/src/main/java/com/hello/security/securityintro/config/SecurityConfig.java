@@ -1,12 +1,21 @@
 package com.hello.security.securityintro.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @Configuration
+@Slf4j
+@EnableWebSecurity(debug = true)
 public class SecurityConfig {
     // 인증 인가 설정.
     @Bean
@@ -18,30 +27,33 @@ public class SecurityConfig {
          */
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();// postman을 위해 개발기간만 꺼둠
 
         // form 인증 처리
         http.formLogin()
-                .usernameParameter("userName")
+                .usernameParameter("username")
                 .passwordParameter("password")
-                .loginProcessingUrl("/user/login")
+                .loginProcessingUrl("/login")
                 .successHandler((req, res, authentication) -> {
                     System.out.println("디버그 : 로그인성공 -> " );
-                    res.sendRedirect("/");
+                    res.sendRedirect("/board");
                 })
                 .failureHandler((request, response, exception) -> {
                     System.out.println("디버그 : 로그인실패 ->"+exception.getMessage());
+                    response.sendRedirect("/login");
                 });
-
 
         // 권한 필터 설정
         http.authorizeRequests((authorize) ->{
             //로그인이 필요한 페이지 설정
-            authorize.antMatchers("/board").authenticated();
-            authorize.antMatchers("/board/create").access("hasRole('ADMIN') or hasRole('MANAGER')")
-                    .anyRequest().permitAll();
+            authorize.antMatchers("/login").permitAll();
+            authorize.antMatchers("/board").permitAll()
+;           authorize.antMatchers("/board/create").authenticated();
+            authorize.antMatchers("/board/update").authenticated();
+            authorize.antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('MANAGER')");
         });
 
         return http.build();

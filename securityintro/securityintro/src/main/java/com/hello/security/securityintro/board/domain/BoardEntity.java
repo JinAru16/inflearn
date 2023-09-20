@@ -27,6 +27,13 @@ public class BoardEntity {
         this.content = content;
     }
 
+    @Builder
+    public BoardEntity(BoardDetailDto dto){
+        this.username = dto.getUsername();
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
+    }
+
     public BoardEntity() {
 
     }
