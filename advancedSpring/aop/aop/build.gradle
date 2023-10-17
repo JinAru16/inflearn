@@ -23,7 +23,8 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.springframework.boot:spring-boot-starter-aop' //직접 추가
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	testImplementation 'org.projectlombok:lombok:1.18.22'//직접 추가
 	compileOnly 'org.projectlombok:lombok'
 
 	annotationProcessor 'org.projectlombok:lombok'
