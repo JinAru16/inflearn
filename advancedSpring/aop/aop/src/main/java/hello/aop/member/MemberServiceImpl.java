@@ -11,7 +11,7 @@ public class MemberServiceImpl implements MemberService{
 
 
     @Override
-    @MethodAop("test value")
+    @MethodAop("test value함")
     public String hello(String param) {
         return "ok";
 
