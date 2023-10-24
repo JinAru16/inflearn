@@ -26,7 +26,7 @@ public class LogTraceAdvice implements MethodInterceptor {
             String message = method.getDeclaringClass().getSimpleName() + "." + method.getName() + "()";
             status = logTrace.begin(message);
 
-            // 로직 호출
+            // 로직 호출 == 타겟 호출.
             Object result = invocation.proceed();
             logTrace.end(status);
             return result;
