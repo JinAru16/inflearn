@@ -77,37 +77,80 @@ public class ExecutionTest {
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
     @Test
-    void nameMatchFail(){//메서드 명으로 찾는건 같지만 패턴 매치
+    void nameMatchFail(){//메서드 명으로 찾는데 실패함 -> 없는 매서드명이라서
         pointcut.setExpression("execution(* none(..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
     }
 
     @Test
-    void packageExactMatch1(){//메서드 명으로 찾는건 같지만 패키지 매치
+    void packageExactMatch1(){//패키지명으로 검색. 완전한 검색
         pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.hello(..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
     @Test
-    void packageExactMatch2(){//메서드 명으로 찾는건 같지만 패턴 매치
+    void packageExactMatch2(){//패키지명으로 검색2
         pointcut.setExpression("execution(* hello.aop.member.*.*(..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
     @Test
-    void packageExactMatchFail(){//메서드 명으로 찾는건 같지만 패턴 매치
+    void packageExactMatchFail(){//메서드 명으로 찾는건 같지만 패턴 매치 실패
         pointcut.setExpression("execution(* hello.aop.*.*(..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
     }
 
     @Test
-    void packageMatchSubPackage1(){//메서드 명으로 찾는건 같지만 패턴 매치
+    void packageMatchSubPackage1(){//하위 패키지 조회1
         pointcut.setExpression("execution(* hello.aop.member..*.*(..))");// member패키지 하위의 모든 패키지들은 aop적용 대상이 됨
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
     @Test
-    void packageMatchSubPackage2(){//메서드 명으로 찾는건 같지만 패턴 매치
+    void packageMatchSubPackage2(){//하위 패키지 조회 2
         pointcut.setExpression("execution(* hello.aop..*.*(..))");// aop패키지 하위의 모든 패키지들은 aop적용 대상이 됨
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+    @Test
+    void typeExactMatch(){//타입 매치
+        pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.*(..))");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test
+    void typeMatchSuperType(){//타입 매치 -> super타입으로 매칭. 부모타입을 지정하면 매칭이 되는가? -> 됨.ㅇㅇ
+        pointcut.setExpression("execution(* hello.aop.member.MemberService.*(..))");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+        // execution에서는 MemberService처럼 부모타입을 선언해도 그 자식타입은 매칭된다. 다형성에서 '부모타입 = 자식타입'이 할당 가능하다는 점을 떠올려보자
+    }
+
+    @Test
+    void typeMatchInternal() throws NoSuchMethodException {
+        pointcut.setExpression("execution(* hello.aop.member.MemberService.*(..))");// 부모타입에 선언하지 않은 자식클래스의 메소드는 매칭되지 않음.
+        //pointcut.setExpression("execution(* hello.aop.member.MemberServiceImpl.*(..))"); 자식타입으로 매칭시키면 당연히 매칭됨.
+        Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
+        assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isTrue();
+    }
+    @Test// String 타입의 파라미터 허용
+    void argsMatch(){
+        pointcut.setExpression("execution(* *(String))");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test// 파라미터가 아예 없는 경우 -> 파라미터가 존재하기 때문에 여기선 거짓.
+    void argsMatchNoParameter(){
+        pointcut.setExpression("execution(* *())");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
+    }
+
+    @Test// 모든타입의 파라미터, 파라미터 갯수에 상관없이 허용
+    void argsMatchAll(){
+        pointcut.setExpression("execution(* *(..))");
+        assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
+    }
+
+    @Test// String타입으로 시작하지만 그 이후의 파라미터에 대해선 갯수, 타입 무관 ex -> (String) (String, x) (String, xxx, xxx)
+    void argsMatchCoplex(){
+        pointcut.setExpression("execution(* *(String, ..))");
         assertThat(pointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
