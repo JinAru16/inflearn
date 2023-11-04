@@ -1,0 +1,20 @@
+package hello.aop.internallcall;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+
+@Slf4j
+@Component
+public class CallServiceV0 {
+
+    public void external(){
+        log.info("call external");
+        internal();// ㄴㅐ부 매서드 호출(this.internal())
+    }
+
+    public void internal(){
+        log.info("call internal");
+    }
+
+}
+
