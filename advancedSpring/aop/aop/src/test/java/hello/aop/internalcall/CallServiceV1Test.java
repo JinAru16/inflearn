@@ -12,20 +12,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @Slf4j
 @Import(CallLogAspect.class)
 @SpringBootTest
-class CallServiceV0Test {
+class CallServiceV1Test {
 
     @Autowired
-    CallServiceV0 callServiceV0;
+    CallServiceV1 callServiceV1;
 
     @Test
-    void external(){
-        //log.info("target={}", callServiceV0.getClass());
-        callServiceV0.external();
+    void external() {
+        callServiceV1.external();
     }
 
     @Test
-    void internal(){
-        callServiceV0.internal();
+    void internal() {
+        callServiceV1.internal();
     }
-
 }
