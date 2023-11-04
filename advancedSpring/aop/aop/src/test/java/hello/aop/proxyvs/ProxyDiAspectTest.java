@@ -28,7 +28,7 @@ class ProxyDiAspectTest {
      * JDK 동적 프록시는 대상 객체인 MemberServiceImpl 타입에 의존관계를 주입할 수 없다.
      * CGLIB 프록시는 대상 객체인 MemberServiceImpl 타입에 의존관계를 주입할 수 '있다'.
 
-     -> 여기까지 보면 CGLIB가 젤 좋아보임.
+     -> 여기까지 보면 impl주입 방식이 젤 좋아보임.
 
      but DI의 의미가 많이 퇴색됨.
      DI의 장점은 클라이언트 코드의 변경 없이 구현클래스를 변경할 수 있다는것이다.
