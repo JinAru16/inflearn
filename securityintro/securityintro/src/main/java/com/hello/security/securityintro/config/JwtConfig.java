@@ -23,10 +23,11 @@ public class JwtConfig {
 
 
     public String generateTokenFromUsername(UserDetailsImpl user, boolean isAccessToken){
+
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + ((isAccessToken ? 30 : 180)  * 60000)))
+                .setExpiration(new Date(System.currentTimeMillis() + ((isAccessToken ? config.getAccessTokenExpirationMin() : config.getRefreshTokenExpirationMin())  * 60000)))
                 .claim("username", user.getUsername())
                 .claim("phoneNum", user.getPhoneNumber())
                 .claim("role", user.getRole())

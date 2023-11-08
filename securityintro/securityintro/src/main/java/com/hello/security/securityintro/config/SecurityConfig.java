@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,26 +36,20 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();// postman을 위해 개발기간만 꺼둠
 
-//        // form 인증 처리
+//        //로그인폼 방법
 //        http.formLogin()
 //                .usernameParameter("username")
 //                .passwordParameter("password")
-//                .loginProcessingUrl("/login")
-//                .successHandler((req, res, authentication) -> {
-//                    System.out.println("디버그 : 로그인성공 -> " );
-//                    res.sendRedirect("/board");
-//                })
-//                .failureHandler((request, response, exception) -> {
-//                    System.out.println("디버그 : 로그인실패 ->"+exception.getMessage());
-//                    response.sendRedirect("/login");
-//                });
+//                .loginPage("/login")//클라이언트에서 보는 로그인 주소
+//                .loginProcessingUrl("/signin")// 로그인 처리를 받는 api의 url
+//                .defaultSuccessUrl("/board");
 
         // 권한 필터 설정
         http.authorizeRequests((authorize) ->{
             //로그인이 필요한 페이지 설정
             authorize.antMatchers("/signin").permitAll();
-            authorize.antMatchers("/board").permitAll()
-;           authorize.antMatchers("/board/create").authenticated();
+            authorize.antMatchers("/board").permitAll();
+            authorize.antMatchers("/board/create").authenticated();
             authorize.antMatchers("/board/update").authenticated();
             authorize.antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('MANAGER')");
         });
@@ -68,6 +63,12 @@ public class SecurityConfig {
     private SecretKey serializedSecretKey;
     @Value("${custom.jwt.secretKey}")
     private String secretKeyPlain;
+
+    @Value("${custom.jwt.accessTokenExpirationMin:30}")
+    private int accessTokenExpirationMin;
+
+    @Value("${custom.jwt.refreshTokenExpirationMin:180}")
+    private int refreshTokenExpirationMin;
 
     // transform plain secretKey to serializedSecretKey
     private SecretKey _getSecretKey(){
