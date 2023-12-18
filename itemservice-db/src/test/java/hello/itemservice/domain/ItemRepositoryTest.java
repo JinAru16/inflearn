@@ -60,6 +60,7 @@ class ItemRepositoryTest {
     }
 
     @Test
+    //@Commit 알다싶이 save매서드 쓰면 캐시에 저장해뒀다가 연산이 다 끝나면 실제 커밋이 이뤄짐 테스트에선 테스트 끝나고 롤백해버리니깐 업데이트문이 안날아감.
     void updateItem() {
         //given
         Item item = new Item("item1", 10000, 10);

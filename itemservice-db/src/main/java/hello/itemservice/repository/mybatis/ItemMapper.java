@@ -10,7 +10,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Optional;
 
-@Mapper
+
+//@Mapper
 public interface ItemMapper {
     void save(Item item);
 
