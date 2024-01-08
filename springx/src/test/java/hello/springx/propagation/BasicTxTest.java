@@ -83,11 +83,12 @@ public class BasicTxTest {
     void inner_commit(){
         log.info("외부 트랜잭션 시작");
         TransactionStatus outer = txManager.getTransaction(new DefaultTransactionAttribute());
-        log.info("outer.isNewTransaction() = {}", outer.isNewTransaction());
+        log.info("outer.isNewTransaction() = {}", outer.isNewTransaction()); //이건 새로 생긴 트랜잭션
 
         log.info("내부 트랜잭션 시작");
         TransactionStatus inner = txManager.getTransaction(new DefaultTransactionAttribute());
-        log.info("outer.isNewTransaction() = {}", inner.isNewTransaction());
+        log.info("outer.isNewTransaction() = {}", inner.isNewTransaction()); // 얘는 기존의 트랜잭션을 이어받아 참여하는 트랜잭션.
+        // 트랜잭션에 참여한다 -> 그냥 아무것도 안한다는거임. 기존의 연산을 그대로 기존의 트랜잭션 내에서 계속 이어나가겠다는 말임.
 
         log.info("내부 트랜잭션 커밋");
         txManager.commit(inner);
@@ -110,6 +111,11 @@ public class BasicTxTest {
 
         log.info("외부 트랜잭션 롤백");
         txManager.rollback(outer);
+
+        /**
+         *  이것만 기억하면 된다. 기본옵션(REQUIRED를 직접 주거나 아니면 아무것도 지정하지 않은 기본 상태)에서는 
+         *  여러개의 하나의 물리 트랜잭션을 구성하는 여러개의 논리 트랜잭션들 중 하나라도 롤백이 발생하면 전체가 롤백이 된다.
+         */
     }@Test
     void inner_rollback(){
         log.info("외부 트랜잭션 시작");
