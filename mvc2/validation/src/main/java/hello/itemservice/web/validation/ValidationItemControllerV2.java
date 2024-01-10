@@ -24,6 +24,7 @@ import java.util.Map;
 public class ValidationItemControllerV2 {
 
     private final ItemRepository itemRepository;
+    private final ItemValidator itemValidator;
 
     @GetMapping
     public String items(Model model) {
@@ -148,6 +149,17 @@ public class ValidationItemControllerV2 {
             //model.addAttribute("errors", bindingResult); <- bindingResult를 Model에 담지 않아도 됨.  BindingResult는 자동으로 Mpdel에 넘어감
             return "validation/v2/addForm";
         }
+
+        //성공 로직
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        return "redirect:/validation/v2/items/{itemId}";
+    }
+    public String addItemV5(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        //BindingResult bindingResult 파라미터의 위치는 @ModelAttribute Item item 다음에 와야 한다
+
+        itemValidator.validate(item, bindingResult);
 
         //성공 로직
         Item savedItem = itemRepository.save(item);
