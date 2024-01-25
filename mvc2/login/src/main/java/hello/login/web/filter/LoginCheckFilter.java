@@ -36,7 +36,7 @@ public class LoginCheckFilter implements Filter {
                     return;
                 }
             }
-            chain.doFilter(request, response);
+            chain.doFilter(request, response);// 이걸 호출하지 않으면 다음단계로 진행하지 않음. 반드시 호출할 것
 
         }catch (Exception e){
             throw e; //예외를 로깅할 수 있지만 톰캣까지 예외를 보내줘야 함.
