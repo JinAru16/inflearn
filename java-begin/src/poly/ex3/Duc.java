@@ -5,6 +5,4 @@ public class Duc extends AbstractAnimal{
     public void sound() {
         System.out.println("꽉꽉");
     }
-
-
 }
