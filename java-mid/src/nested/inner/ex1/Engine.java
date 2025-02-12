@@ -1,4 +1,4 @@
-package nested.nested.inner.ex1;
+package nested.inner.ex1;
 
 
 // car에서만 사용
