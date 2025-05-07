@@ -1,4 +1,4 @@
-package nested.local;
+package nested.nested.local;
 
 public class LocalOuterV2 {
     private int outInstanceVar = 3;

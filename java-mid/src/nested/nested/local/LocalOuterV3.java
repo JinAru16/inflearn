@@ -1,8 +1,8 @@
-package nested.local;
+package nested.nested.local;
 
 import java.lang.reflect.Field;
 
-public class LocalOuterV4 {
+public class LocalOuterV3 {
     private int outInstanceVar = 3;
 
     public Printer process(int paramVar){
@@ -22,15 +22,12 @@ public class LocalOuterV4 {
             }
         }
         LocalPrinter printer = new LocalPrinter();
-        // 만약 localVar의 값을 변경한다면? 다시 캡쳐해야 하나?
-        // localVar = 10;
-        // paramVar = 20;
-
+        //printer.print(); 를 여기서 실행하지 않고 Printer인스턴스만 반환한다.
         return printer;
     }
 
     public static void main(String[] args) {
-        LocalOuterV4 local = new LocalOuterV4();
+        LocalOuterV3 local = new LocalOuterV3();
         Printer printer = local.process(2);
         // printer.print()를 나중에 실행한다. process()의 스택 스페임이 사라진 이후에 실행.
         printer.print();
