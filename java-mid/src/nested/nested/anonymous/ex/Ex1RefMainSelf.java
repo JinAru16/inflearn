@@ -9,26 +9,17 @@ public class Ex1RefMainSelf {
         System.out.println("프로그램 종료");
     }
 
-    static HelloFunc runDice = new HelloFunc() {
-        @Override
-        public void hello() {
+    public static void main(String[] args) {
+        runFunction(() -> {
             int i = new Random().nextInt(6) + 1;
             System.out.println("i = "+ i);
-        }
-    };
+        });
 
-    static HelloFunc runSum = new HelloFunc() {
-        @Override
-        public void hello() {
+        runFunction(() -> {
             for(int i = 0; i < 3; i++){
                 System.out.println("i = "+ i);
             }
-        }
-    };
-
-    public static void main(String[] args) {
-        runFunction(runDice);
-        runFunction(runSum);
+        });
     }
 
 
